@@ -1,0 +1,16 @@
+bin/
+obj/
+/packages/
+riderModule.iml
+/_ReSharper.Caches/
+
+.idea
+.vs/
+.vscode/
+
+*.tmp
+*.temp
+*.pidb
+*.log
+*.swp
+*.sln.ide
