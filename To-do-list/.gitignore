@@ -15,3 +15,5 @@ riderModule.iml
 *.log
 *.swp
 *.sln.ide
+
+appsettings.Production.json
