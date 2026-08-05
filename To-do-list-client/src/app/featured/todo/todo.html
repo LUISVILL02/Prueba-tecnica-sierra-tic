@@ -1,0 +1,46 @@
+<section class="page">
+  <header class="page__head">
+    <p class="page__eyebrow">Lista de tareas</p>
+    <h1 class="page__title">Tareas</h1>
+    <p class="page__meta">
+      <span>{{ openCount() }} abierta(s)</span>
+      <span aria-hidden="true">·</span>
+      <span>{{ doneCount() }} completada(s)</span>
+    </p>
+  </header>
+
+  <div class="page__form">
+    <app-task-form
+      [taskId]="editingId()"
+      [initial]="editingInitial()"
+      (create)="onCreateTask($event)"
+      (update)="onUpdateTask($event.payload)"
+      (cancel)="onCancelEdit()"
+    />
+  </div>
+
+  @if (service.mutationError(); as error) {
+    <p class="banner" role="alert">{{ error }}</p>
+  }
+
+  @if (isListLoading()) {
+    <p class="state">Cargando tareas…</p>
+  } @else if (service.list.status() === 'error') {
+    <div class="state">
+      <p>No se pudieron cargar las tareas.</p>
+      <button class="state__action" type="button" (click)="reload()">Reintentar</button>
+    </div>
+  } @else if (tasks().length === 0) {
+    <p class="state">Aún no hay tareas. Añade la primera desde el formulario.</p>
+  } @else {
+    <app-task-card-list
+      [tasks]="tasks()"
+      (complete)="onComplete($event)"
+      (edit)="onEdit($event)"
+      (delete)="onDelete($event)"
+      (view)="onView($event)"
+    />
+  }
+
+  <app-task-detail-modal />
+</section>

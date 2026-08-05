@@ -1,0 +1,167 @@
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 13rem;
+  height: 100%;
+  background: var(--color-paper);
+  border: 1px solid var(--color-stone);
+  border-radius: 6px;
+  padding: 1.25rem;
+  box-shadow: 0 1px 0 rgba(32, 26, 22, 0.04);
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.card:hover {
+  transform: translateY(-1px);
+}
+
+.card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  flex: 1;
+}
+
+.card__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  line-height: 1.25;
+  color: var(--color-ink);
+}
+
+.card__desc {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: #6f675d;
+}
+
+.card__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  border-top: 1px dashed var(--color-stone);
+  padding-top: 0.6rem;
+  margin-top: 1rem;
+}
+
+.card__date {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--color-stone);
+}
+
+.card__check {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-persimmon);
+  background: none;
+  border: 1px solid transparent;
+  padding: 0.2rem 0.5rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.card__check:hover {
+  border-color: var(--color-persimmon);
+}
+
+.card__check--done {
+  color: var(--color-verified);
+  border-color: var(--color-verified);
+  cursor: default;
+}
+
+.card__check--done:hover {
+  border-color: var(--color-verified);
+}
+
+.card--done .card__title {
+  text-decoration: line-through;
+  color: var(--color-stone);
+}
+
+.card--done .card__desc {
+  color: var(--color-stone);
+}
+
+.card--done .card__check {
+  color: var(--color-verified);
+  border-color: var(--color-verified);
+}
+
+.card__actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  border-top: 1px dashed var(--color-stone);
+  padding-top: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.card__action {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  background: none;
+  border: 1px solid var(--color-stone);
+  padding: 0.3rem 0.7rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.card__action:hover {
+  border-color: var(--color-ink);
+}
+
+.card__action--danger {
+  color: var(--color-persimmon);
+  border-color: transparent;
+}
+
+.card__action--danger:hover {
+  border-color: var(--color-persimmon);
+}
+
+.card__confirm-text {
+  font-size: 0.78rem;
+  color: var(--color-ink);
+  margin-right: 0.25rem;
+}
+
+.card__stamp {
+  position: absolute;
+  right: 1rem;
+  top: 1.25rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--color-verified);
+  border: 3px solid var(--color-verified);
+  border-radius: 6px;
+  padding: 0.1rem 0.7rem;
+  transform: rotate(-12deg);
+  opacity: 0.85;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .card__check,
+  .card__action {
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .card {
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+}

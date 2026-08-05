@@ -1,0 +1,41 @@
+<form class="form" (submit)="onSubmit(); $event.preventDefault()" novalidate>
+  <p class="form__heading">{{ editing() ? 'Editar tarea' : 'Nueva tarea' }}</p>
+
+  <div class="form__field">
+    <label class="form__label" for="task-title">Título</label>
+    <input
+      class="form__input"
+      id="task-title"
+      type="text"
+      placeholder="Qué hay que hacer?"
+      [formField]="taskForm.title"
+    />
+    @if (taskForm.title().touched() && taskForm.title().errors().length > 0) {
+      <p class="form__error">{{ taskForm.title().errors()[0].message }}</p>
+    }
+  </div>
+
+  <div class="form__field">
+    <label class="form__label" for="task-description">Descripción</label>
+    <textarea
+      class="form__input form__input--area"
+      id="task-description"
+      rows="3"
+      placeholder="Algún detalle útil…"
+      [formField]="taskForm.description"
+    ></textarea>
+    @if (taskForm.description().touched() && taskForm.description().errors().length > 0) {
+      <p class="form__error">{{ taskForm.description().errors()[0].message }}</p>
+    }
+  </div>
+
+  <div class="form__actions">
+    @if (editing()) {
+      <button class="form__cancel" type="button" (click)="cancel.emit()">Cancelar</button>
+    }
+
+    <button class="form__submit" type="submit" [disabled]="taskForm().invalid()">
+      {{ editing() ? 'Guardar cambios' : 'Añadir tarea' }}
+    </button>
+  </div>
+</form>

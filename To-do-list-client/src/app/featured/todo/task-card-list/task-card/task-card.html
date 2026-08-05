@@ -1,0 +1,45 @@
+<article
+  class="card"
+  [class.card--done]="task().isCompleted"
+>
+  <div class="card__body">
+    <h3 class="card__title">{{ task().title }}</h3>
+    <p class="card__desc">{{ task().description }}</p>
+  </div>
+
+  <div class="card__foot">
+    @if (!task().isCompleted) {
+      <button
+        class="card__check"
+        type="button"
+        (click)="complete.emit(task())"
+      >
+        Marcar completada
+      </button>
+    } @else {
+      <span class="card__check card__check--done">Completada</span>
+    }
+
+    <time class="card__date">{{ task().createdAt | date: 'dd MMM yyyy' }}</time>
+  </div>
+
+  <div class="card__actions">
+    @if (confirmingDelete()) {
+      <span class="card__confirm-text">¿Eliminar esta tarea?</span>
+      <button class="card__action card__action--danger" type="button" (click)="confirmDelete()">
+        Sí, eliminar
+      </button>
+      <button class="card__action" type="button" (click)="cancelDelete()">Cancelar</button>
+    } @else {
+      <button class="card__action" type="button" (click)="view.emit(task())">Ver</button>
+      <button class="card__action" type="button" (click)="edit.emit(task())">Editar</button>
+      <button class="card__action card__action--danger" type="button" (click)="askDelete()">
+        Eliminar
+      </button>
+    }
+  </div>
+
+  @if (task().isCompleted) {
+    <span class="card__stamp" aria-hidden="true">Hecho</span>
+  }
+</article>

@@ -1,0 +1,17 @@
+@if (tasks().length === 0) {
+  <p class="empty">No hay tareas todavía. Añade la primera desde el formulario.</p>
+} @else {
+  <ul class="list">
+    @for (task of tasks(); track task.id) {
+      <li class="list__item">
+        <app-task-card
+          [task]="task"
+          (complete)="complete.emit($event)"
+          (edit)="edit.emit($event)"
+          (delete)="delete.emit($event)"
+          (view)="view.emit($event)"
+        />
+      </li>
+    }
+  </ul>
+}

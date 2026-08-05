@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { Layout } from "./shared/layout/layout";
+import { Todo } from './featured/todo/todo';
+import { Loader } from './shared/loading/loader';
 
 @Component({
   selector: 'app-root',
-  imports: [Layout],
+  imports: [Todo, Loader],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

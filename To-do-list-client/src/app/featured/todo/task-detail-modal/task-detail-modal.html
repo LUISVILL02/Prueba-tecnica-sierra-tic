@@ -1,0 +1,66 @@
+@if (service.detailOpen()) {
+  <div
+    class="modal-backdrop"
+    (click)="onBackdrop($event)"
+  >
+    <div
+      class="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="task-detail-title"
+    >
+      <div class="modal__head">
+        <h2 id="task-detail-title" class="modal__title">Detalle de la tarea</h2>
+        <button
+          class="modal__close"
+          type="button"
+          aria-label="Cerrar"
+          (click)="closeModal()"
+        >
+          ×
+        </button>
+      </div>
+
+      @if (service.detail.isLoading()) {
+        <p class="modal__state">Cargando…</p>
+      } @else if (service.detail.status() === 'error') {
+        <div class="modal__state">
+          <p>No se pudo cargar la tarea.</p>
+          <button
+            class="modal__retry"
+            type="button"
+            (click)="service.reloadDetail()"
+          >
+            Reintentar
+          </button>
+        </div>
+      } @else if (service.detail.hasValue()) {
+        @let task = service.detail.value();
+        <dl class="modal__body">
+          <div class="modal__row">
+            <dt>Id</dt>
+            <dd>{{ task.id }}</dd>
+          </div>
+          <div class="modal__row">
+            <dt>Título</dt>
+            <dd>{{ task.title }}</dd>
+          </div>
+          <div class="modal__row">
+            <dt>Descripción</dt>
+            <dd>{{ task.description }}</dd>
+          </div>
+          <div class="modal__row">
+            <dt>Estado</dt>
+            <dd [class.modal__done]="task.isCompleted">
+              {{ task.isCompleted ? 'Completada' : 'Pendiente' }}
+            </dd>
+          </div>
+          <div class="modal__row">
+            <dt>Creada</dt>
+            <dd>{{ task.createdAt | date: 'dd MMM yyyy, HH:mm' }}</dd>
+          </div>
+        </dl>
+      }
+    </div>
+  </div>
+}
