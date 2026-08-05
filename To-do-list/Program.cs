@@ -1,13 +1,25 @@
+using FluentValidation;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
+using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
 using To_do_list.Data;
 using To_do_list.DTOs;
+using To_do_list.Repositories;
+using To_do_list.Repositories.Impl;
+using To_do_list.Services;
+using To_do_list.Services.Impl;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddScoped<ITaskService, TaskService>();
+
+builder.Services.AddScoped<ITaskRepository, TaskRepository>();
 
 builder.Services.AddControllers();
+builder.Services.AddValidatorsFromAssemblyContaining<Program>();
+builder.Services.AddFluentValidationAutoValidation(); 
+
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApi();
@@ -45,9 +57,7 @@ app.UseExceptionHandler(exceptionApp => exceptionApp.Run(async context => {
 
         var status = context.Response.StatusCode = exception switch
         {
-            UnauthorizedAccessException => StatusCodes.Status401Unauthorized,
             BadHttpRequestException => StatusCodes.Status400BadRequest,
-            AggregateException => StatusCodes.Status400BadRequest,
             FluentValidation.ValidationException => StatusCodes.Status400BadRequest,
             _ => StatusCodes.Status500InternalServerError
         };

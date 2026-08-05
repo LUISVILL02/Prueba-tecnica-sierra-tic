@@ -16,7 +16,7 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
             entity.Property(e => e.Description).HasColumnType("text");
             entity.Property(e => e.Title).HasColumnType("text").IsRequired().HasMaxLength(50);
-            entity.Property(e => e.CreatedAt).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.CreatedAt);
             entity.Property(e => e.IsCompleted);
         });
     }
