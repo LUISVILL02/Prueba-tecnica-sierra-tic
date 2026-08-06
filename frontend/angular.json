@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "To-do-list-client": {
+    "frontend": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -16,6 +16,7 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
+            "outputPath": "dist/frontend",
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
