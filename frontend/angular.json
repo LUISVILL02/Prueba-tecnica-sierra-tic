@@ -61,10 +61,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "To-do-list-client:build:production"
+              "buildTarget": "frontend-client:build:production"
             },
             "development": {
-              "buildTarget": "To-do-list-client:build:development"
+              "buildTarget": "frontend-client:build:development"
             }
           },
           "defaultConfiguration": "development"
